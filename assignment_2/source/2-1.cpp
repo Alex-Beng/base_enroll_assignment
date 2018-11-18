@@ -1,5 +1,5 @@
 /**
- * Use Hue channel to thershold the image.
+ * Use Hue channel/vector's distance to thershold the image. 
  * Author: Alex Beng
 */
 #include <iostream>

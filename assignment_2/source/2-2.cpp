@@ -1,5 +1,5 @@
 /**
- * Use Hue channel to thershold the image.
+ * Use grabcut to get foreground 
  * Author: Alex Beng
 */
 #include <iostream>
@@ -53,7 +53,7 @@ cv::Mat ThresholdWithGrabcut(cv::Mat image, cv::Rect roi) {
     cv::Mat background, foreground;
     cv::Mat result;
     cv::grabCut(image, result, roi, background, foreground, 5, cv::GC_INIT_WITH_RECT);
-    cv::compare(result, cv::GC_PR_FGD, result, cv::CMP_EQ);
+    result = result == cv::GC_PR_FGD;
     return result;  
 }
 
@@ -63,7 +63,7 @@ int main(int argc, char const *argv[]) {
     }
 
     cv::Mat image = cv::imread(argv[1]);
-    cv::resize(image, image, cv::Size(320, 240));
+    cv::resize(image, image, cv::Size(240, 320));
     image_for_draw = image.clone();
     if (image.empty()) {
         return -1;
