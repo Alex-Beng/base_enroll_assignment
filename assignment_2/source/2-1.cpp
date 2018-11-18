@@ -6,6 +6,15 @@
 #include <opencv2/opencv.hpp>
 using namespace std;
 
+// 添加 alpha 通道
+cv::Mat AddAlpha(cv::Mat image, cv::Mat alpha) {
+    std::vector<cv::Mat> channels;
+    cv::split(image, channels);
+    channels.push_back(alpha);
+    cv::merge(channels, image);
+    return image;
+}
+
 // Hue 通道是一个圆周, 所以需要给定方向
 cv::Mat ThersholdHue(cv::Mat image, int t1, int t2, int direction=0) {
     cv::Mat hsv_image;
@@ -71,13 +80,12 @@ int main(int argc, char const *argv[]) {
     if (image.empty()) {
         return -1;
     }
-    cv::imshow("proc_1", ThersholdHue(image, 100, 200, 0));
-    cv::imshow("proc_2", ThersholdHue(image, 100, 200, 1));
-    cv::waitKey(0);
-    cv::destroyAllWindows();
+
+    cv::imwrite("proc_1.png", AddAlpha(image, ThersholdHue(image, 100, 200, 0)));
+    cv::imwrite("proc_2.png", AddAlpha(image, ThersholdHue(image, 100, 200, 1)));
     
-    cv::imshow("proc_3", ThersholdWithDistance(image, cv::Vec3b(255,255,255), 100, 1));
-    cv::imshow("proc_4", ThersholdWithDistance(image, cv::Vec3b(255,255,255), 100, 2));
-    cv::waitKey(0);
+    cv::imwrite("proc_3.png", AddAlpha(image, ThersholdWithDistance(image, cv::Vec3b(255,255,255), 100, 1)));
+    cv::imwrite("proc_4.png", AddAlpha(image, ThersholdWithDistance(image, cv::Vec3b(255,255,255), 100, 2)));
+
     return 0;
 }
