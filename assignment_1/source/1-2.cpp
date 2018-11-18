@@ -7,8 +7,7 @@
 #include <opencv2/opencv.hpp>
 using namespace std;
 
-void ReduceColor(cv::Mat src_img, int flag = 0, int div = 64)
-{
+void ReduceColor(cv::Mat src_img, int flag = 0, int div = 64) {
     int row = src_img.rows;
     int col = src_img.cols;
     uchar div_half = div >> 1;
@@ -22,12 +21,12 @@ void ReduceColor(cv::Mat src_img, int flag = 0, int div = 64)
                 }
                 else if (src_img.channels() == 3) {
                     for (int t=0; t<3; t++) {
-                        src_img.at<cv::Vec3b>(j, i)[t] = src_img.at<cv::Vec3b>(j, i)[t]/div*div + div_half;  
+                        src_img.at<cv::Vec3b>(i, j)[t] = src_img.at<cv::Vec3b>(j, i)[t]/div*div + div_half;  
                     }
                 }
                 else if (src_img.channels() == 4) {// 最后一个通道为 alpha 通道, 与颜色无关
                     for (int t=0; t<3; t++) {
-                        src_img.at<cv::Vec4b>(j, i)[t] = src_img.at<cv::Vec4b>(j, i)[t]/div*div + div_half;  
+                        src_img.at<cv::Vec4b>(i, j)[t] = src_img.at<cv::Vec4b>(j, i)[t]/div*div + div_half;  
                     }
                 }
             }
@@ -69,8 +68,7 @@ void ReduceColor(cv::Mat src_img, int flag = 0, int div = 64)
 
 // 突然发现把多通道图也干了...2333
 // 那就只写三种方法吧
-int main(int argc, char const* argv[])
-{
+int main(int argc, char const* argv[]) {
     if (argc != 2) {
         return -1;
     }
