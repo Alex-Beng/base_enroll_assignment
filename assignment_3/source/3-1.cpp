@@ -73,6 +73,7 @@ int main(int argc, char const *argv[]) {
         string t_s;
         t_ss << i;
         t_ss >> t_s;
+        cv::resize(result[i], result[i], cv::Size(255,255));
         cv::imshow(t_s, result[i]);
     }
     cv::waitKey(0);
