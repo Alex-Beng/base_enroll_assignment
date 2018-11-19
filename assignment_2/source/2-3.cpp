@@ -1,7 +1,7 @@
 /**
  * Use floodfill to get foreground
 */
-#include <iostream>
+#include <bits/stdc++.h>
 #include <opencv2/opencv.hpp>
 using namespace std;
 cv::Point seed;

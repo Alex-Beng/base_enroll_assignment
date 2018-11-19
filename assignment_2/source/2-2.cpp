@@ -2,7 +2,7 @@
  * Use grabcut to get foreground 
  * Author: Alex Beng
 */
-#include <iostream>
+#include <bits/stdc++.h>
 #include <opencv2/opencv.hpp>
 using namespace std;
 cv::Rect ROI; // grabcut 是对 ROI 进行提取前景的
