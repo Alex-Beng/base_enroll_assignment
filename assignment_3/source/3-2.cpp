@@ -1,5 +1,6 @@
 /**
  * Use image histogram similarity to sort the image
+ * Author: Alex Beng
 */
 #include <bits/stdc++.h>
 #include <opencv2/opencv.hpp>
